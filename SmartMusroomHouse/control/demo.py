@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from SmartMusroomHouse.rf_lib.RF import NRF24
+from SmartMusroomHouse.rf_lib import RF
 import time
 import spidev
 import paho.mqtt.client as mqtt
@@ -61,7 +61,7 @@ GPIO.setwarnings(False)
 pipes = [[0xF0, 0xF0, 0xF0, 0xF0, 0xE2], [0xF0, 0xF0, 0xF0, 0xF0, 0xE1],
          [0xF0, 0xF0, 0xF0, 0xF0, 0xE3]]
 
-radio = NRF24(GPIO, spidev.SpiDev())
+radio = RF.NRF24(GPIO, spidev.SpiDev())
 radio.begin(0, 25)
 radio.setPayloadSize(32)
 radio.setChannel(0x76)
