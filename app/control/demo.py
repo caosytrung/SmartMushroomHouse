@@ -8,6 +8,7 @@ from datetime import datetime
 
 checkk = False
 
+
 CLUSTER_INDEX = 0;
 FARM_ID = 1;
 TEMP_EXISTS_INDEX = 1;
@@ -61,7 +62,7 @@ GPIO.setwarnings(False)
 pipes = [[0xF0, 0xF0, 0xF0, 0xF0, 0xE2], [0xF0, 0xF0, 0xF0, 0xF0, 0xE1],
          [0xF0, 0xF0, 0xF0, 0xF0, 0xE3]]
 
-radio = RF.NRF24(GPIO, spidev.SpiDev())
+radio = NRF24(GPIO, spidev.SpiDev())
 radio.begin(0, 25)
 radio.setPayloadSize(32)
 radio.setChannel(0x76)
