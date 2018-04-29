@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from SmartMusroomHouse.control
+from app.rf_lib.RF import NRF24
 import time
 import spidev
 import paho.mqtt.client as mqtt
