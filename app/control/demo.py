@@ -8,8 +8,8 @@ from  pump_controller import  PumpController
 
 
 def on_message(client, userdata, msg):
-    print("hihihihihhihi")
-    if(msg.topic == PUMP_CONTROLLER_TOPIC):
+    print("hihihihihhihi {0}".format(msg.topic))
+    if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
         print("hahahaahaaaaaaaaaaaaaa")
         jsonData = str(msg.payload)
         pumpControl.readJsonData(jsonData)
