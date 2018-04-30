@@ -9,6 +9,8 @@ ON_COMMAND ="ON"
 OFF_COMMAND ="OFF"
 DELAY_COMMAND ="DELAY"
 pins = [18,17,15,14]
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 GPIO.setup(pins, GPIO.OUT)
 
 class PumpController(threading.Thread):
@@ -25,13 +27,14 @@ class PumpController(threading.Thread):
 
     def turnPumpOn(self):
         if(self.state == OFF_COMMAND):
+            print("Turn On Pin {0}".format(self.pumpControl.relayId))
             self.isDelay = True
-            GPIO.output(self.pumpControl.relayId,GPIO.LOW)
+            GPIO.output(int(self.pumpControl.relayId),GPIO.LOW)
             self.state = ON_COMMAND
 
     def turnPumpOff(self):
         if(self.state == ON_COMMAND):
-            GPIO.output(self.pumpControl.relayId, GPIO.HIGH)
+            GPIO.output(int(self.pumpControl.relayId), GPIO.HIGH)
             self.state = OFF_COMMAND
 
     def processData(self):
