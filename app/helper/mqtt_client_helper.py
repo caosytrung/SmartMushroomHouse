@@ -20,6 +20,8 @@ class MqttClientHelper:
 
     def setMessageListerner(self, on_message):
         self.mqttClient.on_message = on_message
+    def getMqttCline(self):
+        return self.mqttClient
 
     def on_connect(self,client, userdata, flags, rc):
         if rc == 0:

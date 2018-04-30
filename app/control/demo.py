@@ -14,7 +14,7 @@ def on_message(self,client, userdata, msg):
 sensorMqttHelper = MqttClientHelper()
 sensorMqttHelper.setup()
 sensorMqttHelper.setTopic(SENSOR_DATA_TOPIC)
-sensorMqttHelper.setMessageListerner(on_message)
+sensorMqttHelper.getMqttCline().on_message = on_message
 sensorMqttHelper.startLoop()
 
 # sensor data mqtt-------------
@@ -22,7 +22,7 @@ sensorMqttHelper.startLoop()
 controlMqttHelper = MqttClientHelper()
 controlMqttHelper.setup()
 controlMqttHelper.setTopic(CONTROLLER_TOPIC)
-sensorMqttHelper.setMessageListerner(on_message)
+controlMqttHelper.getMqttCline().on_message = on_message
 controlMqttHelper.startLoop()
 
 # nrf24l01-------------
