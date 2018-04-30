@@ -17,8 +17,7 @@ def on_message1(client, userdata, msg):
 
     if(str(msg.topic) == SENSOR_DATA_TOPIC):
         print("h111111111111111111111111")
-        jsonData = str(msg.payload)
-        pumpControl.readJsonData(jsonData)
+       
 
 
 # sensor data mqtt-------------
