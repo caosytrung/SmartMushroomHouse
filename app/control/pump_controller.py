@@ -22,7 +22,7 @@ class PumpController(threading.Thread):
         GPIO.setup(self.pins, GPIO.OUT)
         for pin in self.pins:
             time.sleep(1/10)
-            print("STATR pin {0}".format(pin))s
+            print("STATR pin {0}".format(pin))
             GPIO.output(pin,GPIO.HIGH)
         self.isDelay = False
         self.state = OFF_COMMAND
