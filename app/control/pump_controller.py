@@ -17,6 +17,7 @@ class PumpController(threading.Thread):
     def __init__(self):
         for pin in pins:
             time.sleep(1/10)
+            print("STATR pin {0}".format(pin))
             GPIO.output(pin,GPIO.HIGH)
         self.isDelay = False
         self.state = OFF_COMMAND
