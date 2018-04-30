@@ -10,7 +10,7 @@ class MqttClientHelper:
 
     def setup(self):
         self.mqttClient.on_connect = self.on_connect
-        #self.mqttClient.on_message = self.on_message
+        self.mqttClient.on_message = self.on_message
         self.mqttClient.username_pw_set(MQTT_CLIENT_USERNAME, MQTT_CLIENT_PASSWORD)
         self.mqttClient.connect(MQTT_HOST, MQTT_PORT, 60)
         self.mqttClient.loop_start()
@@ -18,8 +18,8 @@ class MqttClientHelper:
     def setTopic(self,topic):
         self.topic = topic
 
-    def setMessageListerner(self,on_message = None):
-        a =1
+    def setMessageListerner(self, on_message):
+        self.mqttClient.on_message = on_message
 
     def on_connect(self,client, userdata, flags, rc):
         if rc == 0:
