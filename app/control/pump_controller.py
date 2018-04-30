@@ -2,17 +2,21 @@ import threading
 import json
 from app.model.pump_control_data import PumbControlData
 from app.config.mqtt_config import *
-import  RPi.GPIO as GPIO
+
 import time
+import RPi.GPIO as GPIO
 
 ON_COMMAND ="ON"
 OFF_COMMAND ="OFF"
 DELAY_COMMAND ="DELAY"
-pins = [18,17,15,14]
+
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(pins, GPIO.OUT)
 
+pins = [18,17,15,14]
+GPIO.setup(pins, GPIO.OUT)
 class PumpController(threading.Thread):
     def __init__(self):
         for pin in pins:
