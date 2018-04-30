@@ -2,14 +2,14 @@ from app.config.mqtt_config import *
 from app.config.rf_data_config import *
 
 class SensorData:
-    def __init__(self,clusterId,farmId,temp,humi,co2,illum,timestamp):
-        self.clusterId = clusterId
-        self.farmId = farmId
-        self.temp = temp
-        self.humi = humi
-        self.co2 = co2
-        self.illum = illum
-        self.timestamp = timestamp
+    def __init__(self):
+        self.clusterId = "0"
+        self.farmId = "0"
+        self.temp = 0
+        self.humi = 0
+        self.co2 = 0
+        self.illum = 0
+        self.timestamp = 0
 
     def objectToJson(self):
         data = {JSON_CLUSTER_ID_KEY:str(self.clusterId),
