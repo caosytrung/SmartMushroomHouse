@@ -20,7 +20,7 @@ def on_message(client, userdata, msg):
 
 sensorMqttHelper = MqttClientHelper()
 sensorMqttHelper.setup()
-sensorMqttHelper.setTopic(SENSOR_DATA_TOPIC)
+
 sensorMqttHelper.setMessageListerner(on_message)
 sensorMqttHelper.startLoop()
 
