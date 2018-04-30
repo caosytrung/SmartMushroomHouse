@@ -47,10 +47,10 @@ class PumpController(threading.Thread):
     def processData(self):
 
         while 1:
-            controlData = self.pumpControl
-            if controlData is None:
+            if self.pumpControl is None:
                 time.sleep(1)
                 continue
+            controlData = self.pumpControl
 
             if(self.isDelay and self.pumpControl.offDuration > 0):
                 self.pumpControl.offDuration -= 1
