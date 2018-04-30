@@ -47,7 +47,7 @@ class PumpController(threading.Thread):
     def processData(self):
 
         while 1:
-            if hasattr(self,'pumpControl'):
+            if  not hasattr(self,'pumpControl'):
                 time.sleep(1)
                 continue
             controlData = self.pumpControl
