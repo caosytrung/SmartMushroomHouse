@@ -12,16 +12,17 @@ DELAY_COMMAND ="DELAY"
 
 
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
 
-pins = [18,17,15,14]
-GPIO.setup(pins, GPIO.OUT)
+
 class PumpController(threading.Thread):
     def __init__(self):
-        for pin in pins:
+        self.pins = [18,17,15,14]
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+        GPIO.setup(self.pins, GPIO.OUT)
+        for pin in self.pins:
             time.sleep(1/10)
-            print("STATR pin {0}".format(pin))
+            print("STATR pin {0}".format(pin))s
             GPIO.output(pin,GPIO.HIGH)
         self.isDelay = False
         self.state = OFF_COMMAND
