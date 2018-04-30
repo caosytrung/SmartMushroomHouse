@@ -16,6 +16,7 @@ DELAY_COMMAND ="DELAY"
 
 class PumpController(threading.Thread):
     def __init__(self):
+        super(PumpController, self).__init__()
         self.pins = [18,17,15,14]
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
