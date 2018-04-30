@@ -4,9 +4,6 @@ from app.model.pump_control_data import PumbControlData
 from app.config.mqtt_config import *
 import  RPi.GPIO as GPIO
 import time
-from enum import Enum
-
-
 
 ON_COMMAND ="ON"
 OFF_COMMAND ="OFF"
