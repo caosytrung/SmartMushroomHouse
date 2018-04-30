@@ -5,7 +5,7 @@ from app.helper.rf_helper import RfHelper
 from app.helper.mqtt_client_helper import  MqttClientHelper
 from app.config.mqtt_config import SENSOR_DATA_TOPIC,CONTROLLER_TOPIC
 
-def on_message(self,client, userdata, msg):
+def on_message(client, userdata, msg):
     print("" + msg.topic + " " + str(msg.payload))
     print("\n")
 
@@ -14,7 +14,7 @@ def on_message(self,client, userdata, msg):
 sensorMqttHelper = MqttClientHelper()
 sensorMqttHelper.setup()
 sensorMqttHelper.setTopic(SENSOR_DATA_TOPIC)
-sensorMqttHelper.getMqttCline().on_message = on_message
+sensorMqttHelper.setMessageListerner(on_message)
 sensorMqttHelper.startLoop()
 
 # sensor data mqtt-------------
@@ -22,7 +22,7 @@ sensorMqttHelper.startLoop()
 controlMqttHelper = MqttClientHelper()
 controlMqttHelper.setup()
 controlMqttHelper.setTopic(CONTROLLER_TOPIC)
-controlMqttHelper.getMqttCline().on_message = on_message
+controlMqttHelper.setMessageListerner(on_message)
 controlMqttHelper.startLoop()
 
 # nrf24l01-------------
