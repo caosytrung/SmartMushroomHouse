@@ -9,8 +9,8 @@ class MqttClientHelper:
         self.mqttClient = mqtt.Client()
 
     def setup(self):
-        self.mqttClient.on_connect = self.on_connect()
-        self.mqttClient.on_message = self.on_message()
+        self.mqttClient.on_connect = self.on_connect
+        self.mqttClient.on_message = self.on_message
         self.mqttClient.username_pw_set(MQTT_CLIENT_USERNAME, MQTT_CLIENT_PASSWORD)
         self.mqttClient.connect(MQTT_HOST, MQTT_PORT, 60)
         self.mqttClient.loop_start()
