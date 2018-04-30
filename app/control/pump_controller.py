@@ -34,7 +34,7 @@ class PumpController(threading.Thread):
 
     def turnPumpOn(self):
         if(self.state == OFF_COMMAND):
-            print("Turn On Pin {0}".format(self.pumpControl.relayId))
+            print("TURNNNNNNNN On Pin {0}".format(self.pumpControl.relayId))
             self.isDelay = True
             GPIO.output(int(self.pumpControl.relayId),GPIO.LOW)
             self.state = ON_COMMAND
@@ -51,7 +51,7 @@ class PumpController(threading.Thread):
                 time.sleep(1)
                 continue
             controlData = self.pumpControl
-
+            print("VAOXONOOOAAAAA")
             if(self.isDelay and self.pumpControl.offDuration > 0):
                 self.pumpControl.offDuration -= 1
             elif (self.isDelay and self.pumpControl.offDuration <=0):
@@ -68,7 +68,7 @@ class PumpController(threading.Thread):
             elif(self.pumpControl.duration > 0 and
                  self.pumpControl.command == ON_COMMAND):
                 self.pumpControl.duration -= 1
-                if(self.isDelay):
+                if(not self.isDelay):
                     self.turnPumpOn()
             else:
                 self.turnPumpOff()
