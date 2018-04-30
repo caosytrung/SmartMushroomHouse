@@ -3,6 +3,7 @@ from app.config.mqtt_config import *
 from app.config.rf_data_config import *
 from app.model.sensor_data import SensorData
 import json
+import  time
 
 class MqttClientHelper:
     def __init__(self):
@@ -50,7 +51,7 @@ class MqttClientHelper:
             sensorData.co2 = recvMes[CO2_INT_INDEX] + recvMes[CO2_FRACTION_INDEX] * 1.0 / 100
         if (recvMes[ILLUMINANCE_EXISTS_INDEX] == 1):
             sensorData.illum = recvMes[ILLUMINANCE_INT_INDEX] + recvMes[ILLUMINANCE_FRACTION_INDEX] * 1.0 / 100
-
+        sensorData.timestamp = time.time()
         jsonData = sensorData.objectToJson()
         self.mqttClient.publish(SENSOR_DATA_TOPIC, json.dumps(jsonData), 0, True)
 

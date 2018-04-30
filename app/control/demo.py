@@ -1,13 +1,18 @@
 
-from app.rf_lib.RF import NRF24
+import json
 import time
 from app.helper.rf_helper import RfHelper
 from app.helper.mqtt_client_helper import  MqttClientHelper
-from app.config.mqtt_config import SENSOR_DATA_TOPIC,CONTROLLER_TOPIC
+from app.config.mqtt_config import SENSOR_DATA_TOPIC,PUMP_CONTROLLER_TOPIC
+from  pump_controller import  PumpController
+
 
 def on_message(client, userdata, msg):
-    print("" + msg.topic + " " + str(msg.payload))
-    print("\n")
+    if(msg.topic == PUMP_CONTROLLER_TOPIC):
+        jsonData = str(msg.payload)
+        pumpControl.readJsonData(jsonData)
+
+
 
 # sensor data mqtt-------------
 
@@ -21,7 +26,7 @@ sensorMqttHelper.startLoop()
 
 controlMqttHelper = MqttClientHelper()
 controlMqttHelper.setup()
-controlMqttHelper.setTopic(CONTROLLER_TOPIC)
+controlMqttHelper.setTopic(PUMP_CONTROLLER_TOPIC)
 controlMqttHelper.setMessageListerner(on_message)
 controlMqttHelper.startLoop()
 
@@ -31,6 +36,9 @@ rfHelper = RfHelper()
 rfHelper.setup()
 rfHelper.startListeningData()
 
+#Pump
+pumpControl = PumpController()
+pumpControl.start()
 
 print("Starting    ..")
 

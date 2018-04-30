@@ -17,7 +17,8 @@ class SensorData:
                 JSON_TEMP_KEY: self.temp,
                 JSON_HUMP_KEY: self.humi,
                 JSON_CO2_KEY: self.co2,
-                JSON_ILLU_KEY: self.illum
+                JSON_ILLU_KEY: self.illum,
+                JSON_TIMESTAMP_KEY: self.timestamp
                 }
 
         return  data
