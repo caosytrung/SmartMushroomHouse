@@ -8,20 +8,25 @@ from  pump_controller import  PumpController
 
 
 def on_message(client, userdata, msg):
-    print("hihihihihhihi {0}".format(msg.topic))
+
     if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
         print("hahahaahaaaaaaaaaaaaaa")
         jsonData = str(msg.payload)
         pumpControl.readJsonData(jsonData)
+def on_message1(client, userdata, msg):
 
+    if(str(msg.topic) == SENSOR_DATA_TOPIC):
+        print("h111111111111111111111111")
+        jsonData = str(msg.payload)
+        pumpControl.readJsonData(jsonData)
 
 
 # sensor data mqtt-------------
 
 sensorMqttHelper = MqttClientHelper()
 sensorMqttHelper.setup()
-
-sensorMqttHelper.setMessageListerner(on_message)
+sensorMqttHelper.setTopic(SENSOR_DATA_TOPIC)
+sensorMqttHelper.setMessageListerner(on_message1)
 sensorMqttHelper.startLoop()
 
 # sensor data mqtt-------------
