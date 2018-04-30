@@ -3,20 +3,34 @@ from app.rf_lib.RF import NRF24
 import time
 from app.helper.rf_helper import RfHelper
 from app.helper.mqtt_client_helper import  MqttClientHelper
+from app.config.mqtt_config import SENSOR_DATA_TOPIC,CONTROLLER_TOPIC
+
+# sensor data mqtt-------------
 
 
-# mqtt-------------
+sensorMqttHelper = MqttClientHelper()
+sensorMqttHelper.setup()
+sensorMqttHelper.setTopic(SENSOR_DATA_TOPIC)
+sensorMqttHelper.setMessageListerner(on_message)
+sensorMqttHelper.startLoop()
+
+# sensor data mqtt-------------
 
 
-mqttClientHelper = MqttClientHelper()
-mqttClientHelper.setup()
-mqttClientHelper.startLoop()
+# controlMqttHelper = MqttClientHelper()
+# controlMqttHelper.setup()
+# controlMqttHelper.setTopic(CONTROLLER_TOPIC)
+# controlMqttHelper.startLoop()
 
 # nrf24l01-------------
 
 rfHelper = RfHelper()
 rfHelper.setup()
 rfHelper.startListeningData()
+
+def on_message(self,client, userdata, msg):
+        print("" + msg.topic + " " + str(msg.payload))
+        print("\n")
 
 print("Starting    ..")
 
@@ -25,7 +39,7 @@ while True:
     recvMes = rfHelper.readDataintoByteArray()
     print("Received : {}".format(recvMes))
 
-    jsonData = mqttClientHelper.publishDataToBroker(recvMes)
+    jsonData = sensorMqttHelper.publishDataToBroker(recvMes)
     print(jsonData)
     time.sleep(1)
 
