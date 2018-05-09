@@ -2,7 +2,7 @@ import threading
 import json
 from app.model.pump_control_data import PumbControlData
 from app.config.mqtt_config import *
-
+from app.config.rf_data_config import CLUSTER_RELAY_MAPPING
 import time
 import RPi.GPIO as GPIO
 
@@ -28,14 +28,14 @@ class PumpController(threading.Thread):
 
     def turnPumpOn(self):
         if(self.state == OFF_COMMAND):
-            print("TURNNNNNNNN On Pin {0}".format(self.pumpControl.relayId))
+            print("TURNNNNNNNN On Pin {0}".format(self.pumpControl.clusterId))
             self.isDelay = True
-            GPIO.output(int(self.pumpControl.relayId),GPIO.LOW)
+            GPIO.output(int(CLUSTER_RELAY_MAPPING.get(self.pumpControl.clusterId)),GPIO.LOW)
             self.state = ON_COMMAND
 
     def turnPumpOff(self):
         if(self.state == ON_COMMAND):
-            GPIO.output(int(self.pumpControl.relayId), GPIO.HIGH)
+            GPIO.output(int(CLUSTER_RELAY_MAPPING.get(self.pumpControl.clusterId)), GPIO.HIGH)
             self.state = OFF_COMMAND
 
     def processData(self):
