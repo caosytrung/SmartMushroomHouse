@@ -1,7 +1,6 @@
 
 
 CLUSTER_INDEX = 0
-FARM_ID = 1
 
 '''
 Temperature data
@@ -31,6 +30,9 @@ ILLUMINANCE_EXISTS_INDEX = 10
 ILLUMINANCE_INT_INDEX = 11
 ILLUMINANCE_FRACTION_INDEX = 12
 
+FARM_INDEX = 13;
+CURRENT_FARM_ID = 01;
+
 ''''
 pipes address for receiver data
 '''
@@ -38,3 +40,5 @@ PIPES = [[0xF0, 0xF0, 0xF0, 0xF0, 0xE2], [0xF0, 0xF0, 0xF0, 0xF0, 0xE1],
          [0xF0, 0xF0, 0xF0, 0xF0, 0xE3]]
 RF_PLAYLOAD_SIZE = 32
 RF_CHANNEL = 0x76
+
+CLUSTER_RELAY_MAPPING = {0: 18, 2 : 14}

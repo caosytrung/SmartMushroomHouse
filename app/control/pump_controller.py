@@ -11,20 +11,14 @@ OFF_COMMAND ="OFF"
 DELAY_COMMAND ="DELAY"
 
 
-
-
-
 class PumpController(threading.Thread):
-    def __init__(self):
+    def __init__(self,relayID):
         super(PumpController, self).__init__()
-        self.pins = [18,17,15,14]
+        self.pins = relayID
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(self.pins, GPIO.OUT)
-        for pin in self.pins:
-            time.sleep(1/10)
-            print("STATR pin {0}".format(pin))
-            GPIO.output(pin,GPIO.HIGH)
+        GPIO.output(self.p, GPIO.HIGH)
         self.isDelay = False
         self.state = OFF_COMMAND
 
@@ -51,7 +45,7 @@ class PumpController(threading.Thread):
                 time.sleep(1)
                 continue
             controlData = self.pumpControl
-            print("VAOXONOOOAAAAA")
+            print("VAOXONOOOAAAAA") 
             if(self.isDelay and self.pumpControl.offDuration > 0):
                 self.pumpControl.offDuration -= 1
             elif (self.isDelay and self.pumpControl.offDuration <=0):

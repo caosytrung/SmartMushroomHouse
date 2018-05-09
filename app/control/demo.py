@@ -5,14 +5,25 @@ from app.helper.rf_helper import RfHelper
 from app.helper.mqtt_client_helper import  MqttClientHelper
 from app.config.mqtt_config import SENSOR_DATA_TOPIC,PUMP_CONTROLLER_TOPIC
 from  pump_controller import  PumpController
-
+from  app.model.pump_control_data import PumbControlData
+from app.config.mqtt_config import *
+from  app.config.rf_data_config import  *
 
 def on_message(client, userdata, msg):
 
     if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
         print("hahahaahaaaaaaaaaaaaaa")
         jsonData = str(msg.payload)
-        pumpControl.readJsonData(jsonData)
+        jsonArr = json.loads(jsonData)
+        pumpControl = PumbControlData(jsonArr[JSON_CLUSTER_ID_KEY],
+                                      jsonArr[JSON_COMMAND],
+                                      jsonArr[JSON_DURATION],
+                                      jsonArr[JSON_OFF_DURATION])
+        relayId =  CLUSTER_RELAY_MAPPING.get(pumpControl.clusterId)
+        if(relayId == 18):
+            pumpControlCluster0.readJsonData(jsonData)
+        elif(relayId == 14):
+            pumpControlCluster2.readJsonData(jsonData)
 def on_message1(client, userdata, msg):
 
     if(str(msg.topic) == SENSOR_DATA_TOPIC):
@@ -43,8 +54,11 @@ rfHelper.setup()
 rfHelper.startListeningData()
 
 #Pump
-pumpControl = PumpController()
-pumpControl.start()
+pumpControlCluster0 = PumpController(18)
+pumpControlCluster0.start()
+
+pumpControlCluster2 = PumpController(14)
+pumpControlCluster2.start()
 
 print("Starting    ..")
 
