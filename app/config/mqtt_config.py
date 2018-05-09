@@ -19,4 +19,4 @@ JSON_DURATION = "duration"
 JSON_OFF_DURATION ="off_duration"
 
 SENSOR_DATA_TOPIC = "sensor_data"
-PUMP_CONTROLLER_TOPIC = "sensor/"
+PUMP_CONTROLLER_TOPIC = "control/humidity"
