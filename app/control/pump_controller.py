@@ -18,7 +18,7 @@ class PumpController(threading.Thread):
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(self.pins, GPIO.OUT)
-        GPIO.output(self.p, GPIO.HIGH)
+        GPIO.output(self.pins, GPIO.HIGH)
         self.isDelay = False
         self.state = OFF_COMMAND
 
