@@ -1,7 +1,7 @@
 
-MQTT_CLIENT_USERNAME = "fusynscb"
-MQTT_CLIENT_PASSWORD = "lnhvwfsU_7bI"
-MQTT_PORT = 13542
+MQTT_CLIENT_USERNAME = "vgomwcel"
+MQTT_CLIENT_PASSWORD = "u8tzlVTr_da2"
+MQTT_PORT = 13894
 MQTT_HOST = "m14.cloudmqtt.com"
 
 
