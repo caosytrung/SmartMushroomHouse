@@ -74,7 +74,7 @@ class PumpController(threading.Thread):
         jsonArr = json.loads(jsonData)
         if(self.isDelay and jsonArr[JSON_COMMAND] == ON_COMMAND):
             return
-        self.pumpControl = PumbControlData(jsonArr[JSON_RELAY_ID],
+        self.pumpControl = PumbControlData(jsonArr[PUMP_CONTROLLER_TOPIC],
                                       jsonArr[JSON_COMMAND],
                                       jsonArr[JSON_DURATION],
                                       jsonArr[JSON_OFF_DURATION])
