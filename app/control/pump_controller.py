@@ -28,13 +28,14 @@ class PumpController(threading.Thread):
 
     def turnPumpOn(self):
         if(self.state == OFF_COMMAND):
-            print("TURNNNNNNNN On Pin {0}".format(self.pumpControl.clusterId))
+            print("TURN Pump On at  Cluster {0}".format(self.pumpControl.clusterId))
             self.isDelay = True
             GPIO.output(int(CLUSTER_RELAY_MAPPING.get(self.pumpControl.clusterId)),GPIO.LOW)
             self.state = ON_COMMAND
 
     def turnPumpOff(self):
         if(self.state == ON_COMMAND):
+            print("TURN Pump OFF at  Cluster {0}".format(self.pumpControl.clusterId))
             GPIO.output(int(CLUSTER_RELAY_MAPPING.get(self.pumpControl.clusterId)), GPIO.HIGH)
             self.state = OFF_COMMAND
 
@@ -45,7 +46,6 @@ class PumpController(threading.Thread):
                 time.sleep(1)
                 continue
             controlData = self.pumpControl
-            print("VAOXONOOOAAAAA") 
             if(self.isDelay and self.pumpControl.offDuration > 0):
                 self.pumpControl.offDuration -= 1
             elif (self.isDelay and self.pumpControl.offDuration <=0):
