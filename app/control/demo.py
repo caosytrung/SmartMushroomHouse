@@ -11,7 +11,7 @@ from  app.config.rf_data_config import  *
 from app.decrypt.AES_decrypt import AesDecryptData
 
 def on_message(client, userdata, msg):
-
+    print(str(msg.payload))
     if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
         print("PUMP CONTROLLER")
         jsonData = str(msg.payload)
