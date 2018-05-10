@@ -6,10 +6,10 @@ import ctypes
 from app.config.app_config import KEY_SIE
 
 class AesDecryptData:
-    def __init__(self,cipherData):
-        self.setup(cipherData)
+    def __init__(self):
+        self.setup()
 
-    def setup(self,cypherData):
+    def setup(self):
         self.funnSetup = lib.decryptDatas
         self.funnSetup.restype = None
         self.funnSetup.argtypes = [ndpointer(ctypes.c_byte, flags="C_CONTIGUOUS"),
