@@ -11,9 +11,10 @@ from  app.config.rf_data_config import  *
 from app.decrypt.AES_decrypt import AesDecryptData
 
 def on_message(client, userdata, msg):
-    print(str(msg.payload))
+
     if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
         print("PUMP CONTROLLER")
+        print(str(msg.payload))
         jsonData = str(msg.payload)
         jsonArr = json.loads(jsonData)
         pumpControl = PumbControlData(jsonArr[JSON_CLUSTER_ID_KEY],
