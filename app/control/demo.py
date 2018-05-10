@@ -71,8 +71,8 @@ while True:
     recvMes = rfHelper.readDataintoByteArray()
     decryptData.setCipherData(recvMes)
     plainData = decryptData.decryptData()
-
-    print("Received : {}".format(plainData))
+    print("Received : {}".format(recvMes))
+    print("Trnas : {}".format(plainData))
     #jsonData = sensorMqttHelper.publishDataToBroker(recvMes)
     #print(jsonData)
     time.sleep(1)
