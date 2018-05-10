@@ -8,11 +8,12 @@ from  pump_controller import  PumpController
 from  app.model.pump_control_data import PumbControlData
 from app.config.mqtt_config import *
 from  app.config.rf_data_config import  *
+from app.decrypt.AES_decrypt import AesDecryptData
 
 def on_message(client, userdata, msg):
 
     if(str(msg.topic) == PUMP_CONTROLLER_TOPIC):
-        print("hahahaahaaaaaaaaaaaaaa")
+        print("PUMP CONTROLLER")
         jsonData = str(msg.payload)
         jsonArr = json.loads(jsonData)
         pumpControl = PumbControlData(jsonArr[JSON_CLUSTER_ID_KEY],
@@ -26,8 +27,8 @@ def on_message(client, userdata, msg):
             pumpControlCluster2.readJsonData(jsonData)
 def on_message1(client, userdata, msg):
 
-    if(str(msg.topic) == SENSOR_DATA_TOPIC):
-        print("h111111111111111111111111")
+    if(str(msg.topic) != SENSOR_DATA_TOPIC):
+        print ("DICFFERENT TOPIC")
        
 
 
@@ -59,15 +60,21 @@ pumpControlCluster0.start()
 
 pumpControlCluster2 = PumpController(14)
 pumpControlCluster2.start()
+# Decrypt
+decryptData = AesDecryptData();
+
 
 print("Starting    ..")
 
 while True:
 
     recvMes = rfHelper.readDataintoByteArray()
-    print("Received : {}".format(recvMes))
-    jsonData = sensorMqttHelper.publishDataToBroker(recvMes)
-    print(jsonData)
+    decryptData.setCipherData(recvMes)
+    plainData = decryptData.decryptData()
+
+    print("Received : {}".format(plainData))
+    #jsonData = sensorMqttHelper.publishDataToBroker(recvMes)
+    #print(jsonData)
     time.sleep(1)
 
 

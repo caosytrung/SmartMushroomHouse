@@ -6,7 +6,7 @@ lib = cdll.LoadLibrary('/home/pi/Desktop/AES/libf.so')
 from numpy.ctypeslib import ndpointer
 import numpy
 import ctypes
-fun = lib.cfun
+fun = lib.decryptDatas
 fun.restype = None
 fun.argtypes = [ndpointer(ctypes.c_byte, flags="C_CONTIGUOUS"),
                 ctypes.c_size_t,
